@@ -68,9 +68,12 @@ when "rhel"
   source =
     if major.nil? || major == '1'
       "http://packages.treasuredata.com/redhat/$basearch"
-    else
-      # version 2.x or later
-      "http://packages.treasuredata.com/2/redhat/$releasever/$basearch"
+    else  # version 2.x or later
+      if node['platform'] == 'amazon'
+        "http://packages.treasuredata.com/2/redhat/latest/$basearch"
+      else
+        "http://packages.treasuredata.com/2/redhat/$releasever/$basearch"
+      end
     end
 
   yum_repository "treasure-data" do
