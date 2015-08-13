@@ -33,9 +33,9 @@ action :create do
     owner 'root'
     group 'root'
     mode '0644'
-    variables(type: new_resource.type,
-              params: new_resource.params,
-              tag: new_resource.tag)
+    variables(:type => new_resource.type,
+              :params => new_resource.params,
+              :tag => new_resource.tag)
     cookbook 'td-agent'
     notifies :restart, 'service[td-agent]'
   end
